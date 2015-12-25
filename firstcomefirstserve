@@ -1,0 +1,47 @@
+/*FIRST COME FIRST SERVE ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+
+struct process
+{
+   int bt,wt,ta;
+}p[10];
+
+void main()
+{
+   int n=0,wtot=0,ttot=0;
+   float at=0,aw=0;
+   clrscr();
+
+   printf("Enter number of processes required : ");
+   scanf("%d",&n);
+
+   for(int i=0;i<n;i++)
+   {
+     printf("\nEnter burst time of process %d : ",(i+1));
+     scanf("%d",&p[i].bt);
+     p[0].wt=0;
+     if(i>0)
+     {
+      p[i].wt=p[i-1].wt+p[i-1].bt;
+     }
+     p[i].ta=p[i].wt+p[i].bt;
+     wtot=p[i].wt+wtot;
+     ttot=ttot+p[i].ta;
+   }
+   printf("\n\tProcess\tBurst Time\tWait Time\tTurn Around Time\n");
+   for(i=0;i<n;i++)
+   {
+    printf("\t%d\t%d\t\t%d\t\t%d\n\n",(i+1),p[i].bt,p[i].wt,p[i].ta);
+   }
+   at=ttot/(float)n;
+   aw=wtot/(float)n;
+   printf("\nAverage Waiting Time = %f\nAverage turn around time = %f",aw,at);
+
+getch();
+}
+/*FIRST COME FIRST SERVE ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
