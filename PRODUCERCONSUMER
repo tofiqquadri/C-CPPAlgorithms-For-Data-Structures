@@ -1,0 +1,71 @@
+/*PRODUCER CONSUMER ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+int k=0;
+
+void dis(int size,int stack[])
+{
+  if(size==0)
+  {
+     printf("\nStack is empty");
+  }
+  else
+  {
+    for(k=1;k<=size;k++)
+    {
+      printf("%d  ",stack[k]);
+    }
+  }
+}
+
+void main()
+{
+
+   int p[10],c[10],ps=0,cs=0,n=0,ch;
+   clrscr();
+
+	    printf("\nEnter size of stack: ");
+	    scanf("%d",&n);
+	    while(1)
+	    {
+	     clrscr();
+	     printf("\nProducer Stack Size is\n");
+	     dis(ps,p);
+	     printf("\nConsumer Stack Size is\n");
+	     dis(cs,c);
+	     printf("\n1. Produce\n2. Consumer\n3. Exit \n");
+	     scanf("%d",&ch);
+	     switch(ch)
+	     {
+		case 1:  if(ps==n)
+			 {
+			  printf("\nProducer Stack full\n\n(Now produce goes to sleep)\n");
+			 }
+			 else
+			 {ps++;
+			  printf("\nEnter producer item :");
+			  scanf("%d",&p[ps]);
+			 }
+			 break;
+		case 2:  if(cs==n)
+			 {
+			  printf("\nConsumer Stack full");
+			  cs=0;
+			 }
+			 else if(ps!=0)
+			 { cs++;
+			   c[cs]=p[ps];
+			   ps--;
+			 }
+			 break;
+		case 3:  exit(1);
+	       default:  printf("\nWrong choice soap");
+	     }
+	    }
+   getch();
+}
+/*PRODUCER CONSUMER ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
