@@ -1,0 +1,139 @@
+/*BANKERS ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+int k=0;
+
+void main()
+{
+   int p=0,j=0,i=0,r=0,rs[10],max[10][10],count=0;
+   int need[10][10],avail[10],alloc[10][10],total=0;
+   int ss[10],k=0,f=0,attempt=0,m[10]={0,0,0,0,0,0,0,0,0,0};
+   clrscr();
+
+     printf("\nEnter number of processes : ");
+     scanf("%d",&p);
+     printf("\nEnter number of resources : ");
+     scanf("%d",&r);
+     printf("\nEnter maximum instance of each resources : ");
+
+     for(i=0;i<r;i++)
+     {
+      printf("\nFor resource %d : ",(i+1));
+      scanf("%d",&rs[i]);
+     }
+     printf("\nEnter maximum Demand of each resources : ");
+
+     for(i=0;i<p;i++)
+     {
+       printf("\nFor process %d : ",(i+1));
+       for(j=0;j<r;j++)
+       {
+	printf("\nFor resource %d : ",(j+1));
+	scanf("%d",&max[i][j]);
+       }
+     }
+     printf("\nEnter allocation to each process : ");
+
+     for(i=0;i<p;i++)
+     {
+       printf("\nFor process %d : ",(i+1));
+       for(j=0;j<r;j++)
+       {
+	printf("\nFor resource %d : ",(j+1));
+	scanf("%d",&alloc[i][j]);
+       }
+     }
+     for(i=0;i<p;i++)
+     {
+	for(j=0;j<r;j++)
+	{
+	   need[i][j]=max[i][j]-alloc[i][j];
+	}
+     }
+     for(i=0;i<r;i++)
+     {
+       for(j=0;j<p;j++)
+       {
+	  total+=alloc[j][i];
+       }
+       avail[i]=rs[i]-total;
+       total=0;
+     }
+
+     printf("\nProcess Max      Alloc      Need     Avail");
+
+     for(i=0;i<p;i++)
+     {  printf("\n%d       ",(i+1));
+	for(j=0;j<r;j++)
+	{
+	 printf("%d  ",max[i][j]);
+	}  printf("  ");
+
+	for(j=0;j<r;j++)
+	{
+	 printf("%d  ",alloc[i][j]);
+	} printf("  ");
+
+	for(j=0;j<r;j++)
+	{
+	 printf("%d  ",need[i][j]);
+	} printf("  ");
+
+	if(i==(p-1))
+	{
+	 for(j=0;j<r;j++)
+	 {
+	  printf("%d  ",avail[j]);
+	 }
+	}
+     }
+     while(attempt<(p*p))
+     { f=0;
+       attempt++;
+       for(i=0;i<p;i++)
+       {
+	if(m[i]==0)
+	{
+	 for(j=0;j<r;j++)
+	 {
+	   if(need[i][j]<=avail[j])
+	   {
+	   }
+	   else
+	      f=1;
+	 }
+	 if(f==0)
+	 {
+	  ss[k]=(i+1);
+	  k++;
+	  count++;
+	  m[i]=1;
+	  for(j=0;j<r;j++)
+	  {
+	    avail[j]+=alloc[i][j];
+	    need[i][j]=0;
+	  }
+	  }
+	}
+	f=0;
+       }
+       f=0;
+     }
+     if(count==p)
+     {
+       printf("\nSafety Sequence :");
+       for(i=0;i<k;i++)
+       {
+	 printf("\n%d ",ss[i]);
+       }
+     }
+     else
+	printf("\nSystem is in unsafe state");
+
+   getch();
+}
+/*BANKERS ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
