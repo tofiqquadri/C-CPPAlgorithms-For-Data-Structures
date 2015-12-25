@@ -1,0 +1,77 @@
+/*PRIORITY SCHEDULING ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+   struct st
+   {
+     int b,w,t,p;
+   }x[10],t[10];
+
+   int n=0,s=0,st=0;
+   float l=0,a=0,at=0;
+clrscr();
+	    printf("\nEnter number of processes : ");
+	    scanf("%d",&n);
+
+	    printf("\nEnter burst time and priority : ");
+
+	    for(int i=0;i<n;i++)
+	    {
+	      scanf("%d %d",&x[i].b,&x[i].p);
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	      t[i]=x[i];
+	    }
+
+	    for(i=0;i<n;i++)
+	    {
+	      for(int j=0;j<n;j++)
+	      {
+		 if(x[j].p==i)
+		 {  t[i]=x[j];
+		 }
+	      }
+	    }
+	    t[0].w=0;
+	    for(i=1;i<n;i++)
+	    {
+	      t[i].w=t[i-1].b+t[i-1].w;
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	       t[i].t=t[i].b+t[i].w;
+	       s=t[i].w+s;
+	       st=t[i].t+st;
+	       l=n;
+	       a=(float)s/l;
+	       at=(float)st/l;
+
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	      for(int j=0;j<n;j++)
+	      {
+		 if(x[i].p==t[j].p)
+		 {  x[i]=t[j];
+		 }
+	      }
+	    }
+
+	    printf("\n\n");
+	    for(i=0;i<n;i++)
+	    {
+	       printf("\nProcess %d priority: %d BT : %d  WT : %d TA : %d",i+1,x[i].p,x[i].b,x[i].w,x[i].t);
+	    }
+
+	    printf("\n\n");
+	    printf("\nAW : %f AT : %f",a,at);
+	  getch();
+}
+/*PRIORITY SCHEDULING ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
