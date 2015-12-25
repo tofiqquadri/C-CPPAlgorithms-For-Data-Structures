@@ -1,0 +1,77 @@
+/*NON PREEMTIVE SJF ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+
+struct process
+{
+   int bt,wt,ta;
+}p[10],t[10];
+
+void main()
+{
+   int i,j,n=0,wtot=0,ttot=0;
+   float at=0,aw=0;
+   clrscr();
+
+   printf("Enter number of processes required : ");
+   scanf("%d",&n);
+
+   for(i=0;i<n;i++)
+   {
+     printf("\nEnter burst time of process %d : ",(i+1));
+     scanf("%d",&p[i].bt);
+   }
+
+   for(i=0;i<n;i++)
+   {
+    t[i].bt=p[i].bt;
+   }
+   for(i=0;i<n;i++)
+   {
+     for(j=0;j<n;j++)
+     {
+	if(t[i].bt<t[j].bt)
+	{
+	  ttot=t[i].bt;
+	  t[i].bt=t[j].bt;
+	  t[j].bt=ttot;
+	}
+     }
+   }
+   ttot=0;
+   for(i=0;i<n;i++)
+   {
+     t[0].wt=0;
+     if(i>0)
+     {
+      t[i].wt=t[i-1].wt+t[i-1].bt;
+     }
+     t[i].ta=t[i].wt+t[i].bt;
+     wtot=t[i].wt+wtot;
+     ttot=ttot+t[i].ta;
+   }
+   for(i=0;i<n;i++)
+   {
+     for(j=i+1;j<n;j++)
+     {
+       if(p[i].bt==t[j].bt)
+       {
+	p[j].wt=t[i].wt;
+	p[j].ta=t[i].ta;
+       }
+     }
+   }
+
+   printf("\n\tProcess\tBurst Time\tWait Time\tTurn Around Time\n");
+   for(i=0;i<n;i++)
+   {
+      printf("\t%d\t%d\t\t%d\t\t%d\n\n",(i+1),t[i].bt,t[i].wt,t[i].ta);
+   }
+   at=ttot/(float)n;
+   aw=wtot/(float)n;
+   printf("\nAverage Waiting Time = %f\nAverage turn around time = %f",aw,at);
+
+getch();
+}
