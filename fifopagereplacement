@@ -1,0 +1,94 @@
+/*FIRST IN FIRST OUT ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include<stdio.h>
+#include<conio.h>
+#include<process.h>
+
+void main()
+{
+   int f=0,fault=0,ch=0,p=0,s=0,m=0,frame[10],flag=0;
+   clrscr();
+
+      printf("\nEnter number of frames : ");
+      scanf("%d",&f);
+
+      while(1)
+      {
+	getch();
+	clrscr();
+
+	 printf("\n1. To enter a page");
+	 printf("\n2. To count page faults");
+	 printf("\n3. To exit\n");
+	 scanf("%d",&ch);
+	 switch(ch)
+	 {
+	  case 1: printf("\nEnter page :");
+		  scanf("%d",&p);
+
+		  if(s<f)
+		  { if(m==1)
+		    {
+		    for(int i=0;i<f;i++)
+		    {
+			if(frame[i]==p)
+			flag=1;
+		    }
+		    }
+		    else
+		    {
+		    for(int i=0;i<s;i++)
+		    {
+			if(frame[i]==p)
+			flag=1;
+		    }
+
+		    }
+		    if(flag==0)
+		    { frame[s]=p;
+		      s++;
+		      fault++;
+		    }
+		    flag=0;
+		  }
+		  else
+		  {
+		    for(int i=0;i<f;i++)
+		    {
+			if(frame[i]==p)
+			flag=1;
+		    }
+		    if(flag==0)
+		    { m=1;
+		      s=0;
+		      frame[s]=p;
+		      s++;
+		      fault++;
+		    }
+		    flag=0;
+		  }
+		  break;
+	  case 2: printf("\nPage Faults : %d\nFrames are :",fault);
+		  if(m==1)
+		  {
+		  for(int i=0;i<f;i++)
+		  {
+		   printf("\n%d",frame[i]);
+		  }
+		  }
+		  else
+		  {
+		  for(int i=0;i<s;i++)
+		  {
+		   printf("\n%d",frame[i]);
+		  }
+		  }
+		  break;
+	  case 3: exit(1);
+	  }
+	 }
+}
+/*FIRST IN FIRST OUT ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com 
+* LOGON TO http:\\tutorialsnow.weebly.com */
