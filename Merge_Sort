@@ -1,0 +1,84 @@
+#include<iostream>
+
+using namespace std;
+
+void merger(int a[],int l,int h,int m)
+{
+   int i,j,k,c[20];
+
+   i=l;
+   k=l;
+   j=m+1;
+
+   while(i<=m&&j<=h)
+   {
+     if(a[i]<a[j])
+     {
+       c[k]=a[i];
+       k++;
+       i++;
+     }
+     else
+     {
+      c[k]=a[j];
+      k++;
+      j++;
+     }
+   }
+   while(i<=m)
+   {
+       c[k]=a[i];
+       k++;
+       i++;
+   }
+   while(j<=h)
+   {
+       c[k]=a[j];
+       k++;
+       j++;
+   }
+   for(i=l;i<k;i++)
+      a[i]=c[i];
+}
+
+void mergesort(int a[],int l,int h)
+{
+int mid;
+    if(l<h)
+    {
+      mid=(l+h)/2;
+      mergesort(a,l,mid);
+      cout<<"\nLow : "<<l<<" Mid :"<<mid;
+      mergesort(a,mid+1,h);
+      merger(a,l,h,mid);
+      cout<<"\nMerge done";
+    }
+//    return 0;
+}
+
+int main()
+{
+   int ar[100],size=0;
+
+
+     cout<<"Enter the size of array : ";
+     cin>>size;
+
+     cout<<"\nEnter elements of the array :";
+     for(int i=0;i<size;i++)
+     {
+         cin>>ar[i];
+     }
+     cout<<"\nArray elements are: ";
+     for(int i=0;i<size;i++)
+     {
+         cout<<ar[i]<<" ";
+     }
+     mergesort(ar,0,size-1);
+     cout<<"\nSorted array elements are: ";
+     for(int i=0;i<size;i++)
+     {
+         cout<<ar[i]<<" ";
+     }
+     return 0;
+}
