@@ -1,0 +1,92 @@
+/*BINARY TREE ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com
+* LOGON TO http:\\tutorialsnow.weebly.com */
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+ int info;
+ struct node *lchild;
+ struct node *rchild;
+
+}*root;
+
+int ind=0;
+
+void insertInBinaryTree(int data,int size)
+{
+
+ struct node *temp, *ptr, *track_array[size];
+ temp = (struct node*) malloc(sizeof(struct node));
+ temp->info = data;
+ temp->lchild = NULL;
+ temp->rchild = NULL;
+
+ if (root == NULL) {
+  root = temp;
+  printf("\n %d is added as root\n", temp->info);
+  track_array[ind] = root;
+ }
+ else
+ {
+  ptr = track_array[(int) (ind / 2)];
+
+  if (ptr->lchild == NULL)
+  {
+   ptr->lchild = temp;
+   printf("\n %d is assigned as left child if %d\n", temp->info,
+   ptr->info);
+  }
+  else
+  {
+   ptr->rchild = temp;
+   printf("\n %d is assigned as right child if %d\n", temp->info,
+   ptr->info);
+  }
+  ind++;
+  track_array[ind] = temp;
+ }
+
+}
+
+void inorder(struct node *ptr)
+{
+ if(ptr!=NULL)
+ {
+  inorder(ptr->lchild);
+  printf("%d ",ptr->info);
+  inorder(ptr->rchild);
+ }
+}
+
+int main()
+{
+ int var,array[100],n=0;
+
+ printf("\nEnter -1 to stop entering the elements");
+ printf("\nEnter %d element :");
+ scanf("%d",&array[n]);
+ n++;
+ if(array[0]!=(-1))
+ {
+  while(1)
+  {
+   printf("\nEnter %d element :");
+   scanf("%d",&array[n]);
+   if(array[n]==(-1))
+       break;
+   n++;
+  }
+}
+ for (var = 0; var < n; ++var)
+ {
+   insertInBinaryTree(array[var],n);
+ }
+ printf("\nThe inorder traversal is\n");
+ inorder(root);
+
+  return 0;
+}
+/*BINARY TREE ALGORITHM IN C IMPLIMENTED BY TOFIQ QUADRI
+* CONTACT @tofiqquadri@ymail.com
+* LOGON TO http:\\tutorialsnow.weebly.com */
