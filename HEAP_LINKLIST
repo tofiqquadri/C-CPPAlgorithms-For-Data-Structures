@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+ int d,k;
+  struct node *l;
+  struct node *r;
+  struct node *p;
+}*start=NULL,*q,*t;
+
+int n=0;
+
+void search(int h)
+{
+   q=start;
+   int z;
+
+   while(q->k!=h)
+   {
+     z=h;
+     do
+     {
+	if(z/2==q->k)
+	{
+	  if(z%2==0)
+	    q=q->l;
+	  else
+	    q=q->r;
+	}
+	else
+	{
+	  z=z/2;
+	}
+
+     }while(z!=q->k);
+   }
+}
+
+void insert(int da)
+{   int temp;
+    n++;
+    if(n==1)
+    {
+      start=(struct node* )malloc(sizeof(struct node));
+      start->d=da;
+      start->k=n;
+      start->l=NULL;
+      start->r=NULL;
+      start->p=NULL;
+    }
+    else if(n>1)
+    {
+      search(n/2);
+      t=(struct node* )malloc(sizeof(struct node));
+      t->d=da;
+      t->k=n;
+      t->l=NULL;
+      t->r=NULL;
+      t->p=q;
+      if((n%2)==0)
+      {
+	 q->l=t;
+      }
+      else
+	  q->r=t;
+
+       while(t!=start)
+       { if(t->d < t->p->d)
+	 { temp = t->d;
+	  t->d = t->p->d;
+	  t->p->d = temp;
+	  t= t->p;
+	 }
+	 else
+	   break;
+       }
+    }
+
+}
+
+void inorder(struct node *rd)
+{
+
+  if(rd!=NULL)
+  {
+
+    printf("\n%d",rd->d);
+    inorder(rd->l);
+    inorder(rd->r);
+  }
+}
+void main()
+{
+ int i=0,nn=0,size=0;
+ clrscr();
+ printf("\nEnter the size of list :");
+ scanf("%d",&nn);
+
+      for(i=0;i<nn;i++)
+      {
+	 scanf("%d",&size);
+	 insert(size);
+      }
+      inorder(start);
+getch();
+}
