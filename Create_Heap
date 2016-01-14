@@ -1,0 +1,62 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+class heap
+{
+int k[11],size;
+public:
+void getdata(void);
+friend void create_heap(heap &);
+void showdata(void);
+};
+
+void heap :: getdata(void)
+{
+cout<<"Enter the size of Array :-";
+cin>>size;
+cout<<"\nEnter "<<size<<" Elements\n";
+ for(int i=1;i<=size;i++) //Creating heap from  index1 instead of index0
+   cin>>k[i];
+}
+
+void heap :: showdata(void)
+{
+
+  cout<<"\n\nHeap Function Output\n\n";
+  for(int i=1;i<=size;i++)
+    cout<<k[i]<<endl;
+}
+
+void create_heap(heap &a)
+{
+int q,i,j,key;
+  for(q=2;q<=a.size;q++)
+  {
+    i=q;
+    cout<<"\ni = "<<i;
+    key=a.k[i];
+    cout<<"\nkey = "<<key;
+    j=i/2;
+    cout<<"\nj = "<<j;
+    while(i>1 && key>a.k[j])
+      {
+         a.k[i]=a.k[j];
+         i=j;
+         j=i/2;
+         if(j<1)
+            j=1;
+      }
+    a.k[i]=key;
+    a.showdata();
+    }
+}
+
+int main()
+{
+heap o1;
+o1.getdata();
+create_heap(o1);
+o1.showdata();
+return 0;
+}
