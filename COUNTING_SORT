@@ -1,0 +1,68 @@
+/****************************************************************************
+*                       COUNTING SORT IMPLIMENTATION                        *
+*             BY TOFIQ QUADRI (http://www.tutorialsnow.weebly.com)          *
+*                      CONTACT: tofiqquadri@ymail.com                       *
+****************************************************************************/
+#include<iostream.h>
+#include<conio.h>
+
+void main()
+{
+  clrscr();
+	int i=0,j=0,k=0,n=0,ne=0,a[100],b[100],c[100];
+
+	cout<<"Enter the length Array : ";
+	cin>>n;
+
+	cout<<"\nEnter the highest element present in array : ";
+	cin>>ne;
+
+	for(i=0;i<n;i++)
+	{
+	 cout<<"\nEnter element "<<(i+1)<<" of array :";
+	 cin>>a[i];
+	}
+	cout<<"\nElements of the array are : ";
+
+	for(i=1;i<=n;i++)
+	{
+	 cout<<a[i]<<" ";
+	}
+
+	for(i=0;i<=ne;i++)
+	{
+	 c[i]=0;
+	 for(j=1;j<=n;j++)
+	 {
+	    if(i==a[j])
+	     c[i]+=1;
+	 }
+	}
+	cout<<"\nC elements of the array are : ";
+
+	for(i=0;i<=ne;i++)
+	{
+	 cout<<c[i]<<" ";
+	}
+
+	for(i=1;i<=ne;i++)
+	{
+	 c[i]=c[i]+c[i-1];
+	}
+	int t=n;
+	for(j=t;j>=0;j--)
+	{
+	   k=a[j];
+	   i=c[k];
+	   b[i]=k;
+	   c[k]=c[k]-1;
+	}
+
+	cout<<"\nSorted elements of the array are : ";
+	for(i=1;i<=n;i++)
+	{
+	 cout<<b[i]<<" ";
+	}
+
+    getch();
+}
