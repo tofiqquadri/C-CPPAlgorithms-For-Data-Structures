@@ -1,0 +1,86 @@
+/****************************************************************************
+*                      NAPSACK PROGRAM WITHOUT FRACTION                     *
+*        IMPLIMENTED BY: TOFIQ QUADRI CONTACT (tofiqquadri@ymail.com)       *
+*                   SITE: http://www.tutorialsnow.weebly.com                *
+****************************************************************************/
+//INCLUDE NECESSARY HEADER FILES
+#include<iostream.h>
+#include<conio.h>
+
+//CREATE A STRUCTURE TO HOLD DATA OF EACH ELEMENT
+struct as
+{
+  int v,w,vw;
+  float x;
+}s[10],t;
+//EXECUTE MAIN
+void main()
+{
+  clrscr();                     //CLEAR SCREEN  
+
+	int profit=0,n,i,j,W;   //NECESSARY VARIABLES
+	cout<<"Enter Sack Weight: ";  
+	cin>>W;                 //SIZE OF SACK WEIGHT
+
+	cout<<"\nEnter the number of items required: "; 
+	cin>>n;                 //NUMBER OF ITEMS REQUIRED
+
+	for(i=0;i<n;i++)        //DATA OF EACH ITEM IS TAKEN 
+	{
+	 cout<<"\nFor item "<<(i+1)<<" enter: ";
+	 cout<<"\nWeight: ";
+	 cin>>s[i].w;
+
+	 cout<<"\nProfit: ";
+	 cin>>s[i].v;
+
+	 s[i].x=0;
+	 s[i].vw=(s[i].v)/(s[i].w);
+	}                   
+        cout<<endl;             //DROP A LINE                            
+	for(i=0;i<n;i++)        //DISPLAY INPUT VALUES
+	{
+	 cout<<"\nFor item "<<(i+1)<<" Weight: "<<s[i].w<<" Profit: "<<s[i].v<<" profir/weight: "<<s[i].vw;
+	}
+
+	for(i=0;i<(n-1);i++)    //BUBBLE SORT GIVEN VALUES
+	{
+	 for(j=0;j<n-i-1;j++)
+	 {
+	  if(s[j].vw<s[j+1].vw)
+	  {
+	   t=s[j];
+	   s[j]=s[j+1];
+	   s[j+1]=t;
+	  }
+	 }
+	}
+
+	cout<<endl;              //DISPLAY SORTED RESULT
+	for(i=0;i<n;i++)
+	{
+	 cout<<"\nFor item "<<(i+1)<<" Weight: "<<s[i].w<<" Profit: "<<s[i].v<<" profir/weight: "<<s[i].vw;
+	}
+	i=0;
+
+	while(s[i].w<W)          //CALCULATE PROFIT
+	{
+           if(i==n)
+              break;
+	   s[i].x=1;
+	   W=W-s[i].w;
+	   profit+=s[i].v;
+	   i++;                  //INCREAMENT THE COUNTER
+	}
+
+	if(W>0)                  //CALCULATE FRACTIONAL PART PROFIT
+	{
+	  profit+=(W*s[i].vw);
+	  s[i].x=W/s[i].w;
+	  W=0;
+	}
+
+	cout<<"\nProfit: "<<profit;
+	cout<<"\nRemaining weight: "<<W;
+getch();                          //HOLD SCREEN
+}
