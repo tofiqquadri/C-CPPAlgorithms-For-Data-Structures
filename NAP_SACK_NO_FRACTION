@@ -1,0 +1,74 @@
+/****************************************************************************
+*                      NAPSACK PROGRAM WITHOUT FRACTION                     *
+*        IMPLIMENTED BY: TOFIQ QUADRI CONTACT (tofiqquadri@ymail.com)       *
+*                   SITE: http://www.tutorialsnow.weebly.com                *
+****************************************************************************/
+//INCLUDE NECESSARY HEADER FILES REQUIRED
+#include<iostream.h>    
+#include<conio.h>
+//STRUCTURE TO HOLD INFO OF EACH ITEM
+struct as
+{
+  int x,v,w,vw;
+}s[10],t;
+//MAIN FUNCTION
+void main()
+{
+  clrscr();                     //CLEAR PREVIOUS SCREEN
+
+	int profit=0,n,i,j,W;         //DECLARE VARIABLES NEEDED
+	cout<<"Enter Sack Weight: ";  //SACK WEIGHT CAPACITY
+	cin>>W;                       
+
+	cout<<"\nEnter the number of items required: ";     
+	cin>>n;                       //NUMBER OF ITEMS REQUIRED
+
+	for(i=0;i<n;i++)              //TAKE ALL DATA REQUIRED
+	{
+	 cout<<"\nFor item "<<(i+1)<<" enter: ";
+	 cout<<"\nWeight: ";
+	 cin>>s[i].w;
+
+	 cout<<"\nProfit: ";
+	 cin>>s[i].v;
+
+	 s[i].x=0;
+	 s[i].vw=(s[i].v)/(s[i].w);
+	}
+	cout<<endl;                    //DROP A LINE
+	for(i=0;i<n;i++)               //DISPLAY WHAT IS ENTERED
+	{
+	 cout<<"\nFor item "<<(i+1)<<" Weight: "<<s[i].w<<" Profit: "<<s[i].v<<" profir/weight: "<<s[i].vw;
+	}
+
+	for(i=0;i<(n-1);i++)           //PERFORM SORTING USING BUBBLE SORT
+	{
+	 for(j=0;j<n-i-1;j++)
+	 {
+	  if(s[j].vw<s[j+1].vw)
+	  {
+	   t=s[j];
+	   s[j]=s[j+1];
+	   s[j+1]=t;
+	  }
+	 }
+	}
+	cout<<endl;                    //DROP A LINE    
+	for(i=0;i<n;i++)               //DISPLAY SORTED OUTPUT
+	{
+	 cout<<"\nFor item "<<(i+1)<<" Weight: "<<s[i].w<<" Profit: "<<s[i].v<<" profir/weight: "<<s[i].vw;
+	}
+	i=0;                           //INITIALIZE I TO 0
+	while(s[i].w<W)
+	{  
+	   if(i==n)                    //CHECK IF INDEX IS REACHED
+	      break;
+	   s[i].x=1;
+	   W=W-s[i].w;
+	   profit+=s[i].v;
+	   i++;                        //INCREAMENT THE COUNTER FOR WHILE
+	}
+	cout<<"\nProfit: "<<profit;
+	cout<<"\nRemaining weight: "<<W;
+getch();                         //HOLD THE NECESSARY RESUL
+}
