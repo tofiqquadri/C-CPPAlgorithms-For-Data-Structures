@@ -1,0 +1,78 @@
+/****************************************************************************
+*                                JOB SEQUENCE                               *
+*        IMPLIMENTED BY: TOFIQ QUADRI CONTACT (tofiqquadri@ymail.com)       *
+*                   SITE: http://www.tutorialsnow.weebly.com                *
+****************************************************************************/
+#include<iostream.h>
+#include<conio.h>
+
+struct as
+{
+  int no,d,v;
+}s[10],t;
+
+void main()
+{
+  clrscr();
+
+	int max=0,profit=0,n,i,j,W;
+
+	cout<<"\nEnter the number of JOBS required: ";
+	cin>>n;
+
+	for(i=0;i<n;i++)
+	{
+	 cout<<"\nFor JOB "<<(i+1)<<" enter: ";
+	 s[i].no=(i+1);
+	 cout<<"\nDeadline: ";
+	 cin>>s[i].d;
+
+	 cout<<"\nProfit: ";
+	 cin>>s[i].v;
+
+	}
+	for(i=0;i<n;i++)
+	{
+	 cout<<"\nFor job "<<s[i].no<<" Deadline: "<<s[i].d<<" Profit: "<<s[i].v;
+	}
+
+	for(i=0;i<(n-1);i++)
+	{
+	 for(j=0;j<n-i-1;j++)
+	 {
+	  if(s[j].d>s[j+1].d)
+	  {
+	   t=s[j];
+	   s[j]=s[j+1];
+	   s[j+1]=t;
+	  }
+	 }
+	}
+	int pos=0;
+	cout<<"\n\nJob Sequence is: ";
+	for(i=1;i<=n;i++)
+	{
+	  for(j=0;j<n;j++)
+	  {
+	    if(s[j].d==i)
+	    {
+	      if(max<s[j].v)
+	      {
+	       max=s[j].v;
+	       pos=j;
+	      }
+	    }
+	  }
+	  profit+=max;
+	  if(max>0)
+	  {  cout<<"\nJob "<<s[pos].no<<" Max: "<<max;}
+	  max=0;pos=0;
+	}
+	cout<<endl;
+	for(i=0;i<n;i++)
+	{
+	 cout<<"\nFor JOB "<<s[i].no<<" deadline: "<<s[i].d<<" Profit: "<<s[i].v;
+	}
+	cout<<"\nProfit: "<<profit;
+getch();
+}
