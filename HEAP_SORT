@@ -1,0 +1,70 @@
+/****************************************************************************
+*                      HEAP SORT PROGRAM IMPLIMENTATION USING ARRAY         *
+*        IMPLIMENTED BY: TOFIQ QUADRI CONTACT (tofiqquadri@ymail.com)       *
+*                      LOGON TO: http://www.tutorialsnow.weebly.com            *
+****************************************************************************/
+#include<iostream> //HEADER FILES FOR CODE BLOCKS
+#include<conio.h>  //REWRITE iostream.h FOR OTHER COMPILERS IS NECESSARY
+
+using namespace std; //REMOVE THIS LINE FOR TURBO C OR C++
+
+void swap(int *a,int *b) //FUNCTION TO SWAP ELEMENTS OF ARRAY USING POINTERS
+{
+   int t=*a;
+   *a=*b;
+   *b=t;
+}
+
+void createHeap(int a[],int size) //CREATING MIN HEAP
+{
+    int k=0;
+         k=size/2;                //TAKING FLOOR OF SIZE
+   for(int c=1;c<=k;c++)          //RUN LOOP TILL K
+   {
+     if(a[c]>a[2*c])
+        swap(&a[c],&a[2*c]);      //CALL SWAPPING FUNCTION
+     if((2*c+1)<=size)            //FOR RIGHT CHILD CHECK EXISTANCE
+     {
+      if(a[c]>a[2*c+1])
+        swap(&a[c],&a[2*c+1]);    //IF IT EXISTS THE SWAP
+     }
+   }
+}
+
+void HeapSort(int a[],int size)   //SORTING THE HEAP
+{
+   cout<<"\nHeap Sort is: \n";
+   while(size!=0)
+   {
+     cout<<a[1]<<"<<";          //STEP 1. PRINT THE MIN ROOT ELEMENT
+     swap(&a[1],&a[size]);      //STEP 2. SWAP ROOT WITH INORDER SUCESSOR
+     size=size-1;               //STEP 3. DELETE THE ROOT
+     createHeap(a,size);        //STEP 4. REARRANGE THE MIN HEAP
+     getch();
+    }
+}
+
+int main()                      //EXECUTE THE MAIN FUNCTION
+{
+
+    int arr[100],n=0,i=0,j=0;   //FOR STUPID PEOPLE IN LARGE GROUPS ARRAY SIZE IS TAKEN LARGE
+
+     cout<<"Enter number of elements required: ";
+     cin>>n;                    //NUMBER OF ELEMENTS TO BE INSERTED IN THE HEAP
+
+     for(i=1;i<=n;i++)          //TAKE ALL THE ELEMENTS
+     {
+       cin>>arr[i];
+     }
+
+     createHeap(arr,n);         //CREATE INITIAL HEAP
+
+     cout<<"\nMin Heap is: ";   //PRINT THE INITIAL HEAP
+     for(i=1;i<=n;i++)
+     {
+       cout<<arr[i]<<endl;
+     }
+
+     HeapSort(arr,n);           //SORT THE HEAP TILL NO ELEMENT REMAINS
+return 0;                       //THAT'S ALL FOLKS
+}
