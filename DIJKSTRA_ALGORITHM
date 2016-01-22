@@ -1,0 +1,95 @@
+/*******************************************************
+*         DIJKSTRA ALGORITHM IMPLIMETATION IN C++      *
+*                   BY TOFIQ QUADRI                    *
+*******************************************************/
+#include<iostream>
+#include<limits.h>
+#include<stdio.h>
+//CREATE YOUR OWN BOOL TYPE USING TYPEDEF
+//typedef enum booli{false,true}bool;    //USE BRAIN AND MODIFY THIS IF NECESSARY
+using namespace std;                    //IN TURBO C++ REMOVE THIS  
+ 
+int MinDistance(int dist[], bool sptSet[],int V) //FIND MINIMUM DISTANCE VERTEX THAT IS NOT VISITED YET
+{
+   int min = INT_MAX, min_index,v;
+
+   for (v = 0; v < V; v++)
+   {
+     if (sptSet[v] == false && dist[v] <= min)
+     {
+           min = dist[v];
+           min_index = v;
+     }
+   }
+   return min_index;
+}
+
+int PrintDJ(int dist[], int V)   //PRINT DJ LIST
+{
+   int i;
+   printf("Vertex   Distance from Source\n");
+
+   for (i = 0; i < V; i++)
+   {
+      cout<<(i+1)<<"\t\t"<<dist[i]<<endl;
+   }
+}
+
+void DIJKASTRA(int graph[100][100], int src,int V)
+{
+     int count,dist[V],i,v;
+     bool sptSet[V];
+
+     for (i = 0; i < V; i++)
+     {
+      dist[i] = INT_MAX;
+      sptSet[i] = false;
+     }
+
+     dist[src] = 0;
+
+     for (count = 0; count < V-1; count++)
+     {
+       int u = MinDistance(dist, sptSet,V);
+       sptSet[u] = true;
+       printf("\nVertex %d :\n",u+1);
+
+       for (v = 0; v < V; v++)
+         if ( !sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u]+graph[u][v] < dist[v] )
+            dist[v] = dist[u] + graph[u][v];
+     }
+
+     PrintDJ(dist, V);
+}
+
+int main()
+{
+   int V,i,j,g[100][100];     //NECESSARY VARIABLES
+    char ch;
+
+     cout<<"\nEnter number of vertex: ";
+     cin>>V;
+
+     cout<<"\nEnter the values of edges: ";
+     for(i=0;i<V;i++)
+     {
+       for(j=0;j<V;j++)
+       {
+        cout<<"\nEnter y if there is vertex between "<<i<<","<<j;
+        cin>>ch;
+        switch(ch)
+        {
+          case 'y':    cout<<"\nEnter cost ";
+                       cin>>g[i][j];
+                       break;
+          case 'Y':    cout<<"\nEnter cost ";
+                       cin>>g[i][j];
+                       break;
+          default:     g[i][j]=0;
+        }
+       }
+     }
+
+    DIJKASTRA(g, 0,V);
+    return 0;
+}
