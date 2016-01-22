@@ -1,0 +1,94 @@
+/*******************************************************
+*         PRIMS ALGORITHM IMPLIMETATION IN C++         *
+*                   BY TOFIQ QUADRI                    *
+*******************************************************/
+#include <iostream>
+#include <limits.h>
+using namespace std;
+
+int Min(int key[], bool mark[],int V) //IF BOOLEN TYPE IS NOT AVAILABLE THEN
+{                                     //CREATE BY typedef enum booli{false,true}bool;
+   int v,min = INT_MAX, min_ind;      //FIND MIN KEY VERTEX AND INDEX OF IT
+
+   for (v = 0; v < V; v++)
+   {
+    if (mark[v] == false && key[v] < min)
+    {
+        min = key[v]; //MIN VERTEX KEY
+        min_ind = v;  //INDEX
+    }
+   }
+   return min_ind;
+}
+
+int PrintPrim(int parent[], int size, int graph[100][100])
+{
+   cout<<"Edge   Weight\n";
+   for (int i = 1; i < size; i++)   //START FROM 2ND VERTEX BECAUSE ROOT WILL
+   {                                //NEVER HAVE A PARENT
+       cout<<parent[i]<<" - "<<i<<"     "<<graph[parent[i]][i];
+       cout<<endl;
+   }
+}
+
+void PRIMS(int graph[100][100],int V)
+{
+     int parent[V];                //TO FIND STARTING VERTEX OF AN EDGE
+     int key[V];                   //TO FIND MIN DISTANCE
+     bool mark[V];                 //READ ALL COMMENTS IF THIS LINE GIVES AN ERROR
+
+     for (int i = 0; i < V; i++)
+     {
+        key[i] = INT_MAX;
+        mark[i] = false;
+     }
+
+     key[0] = 0;     //KEY OF ROOT SET TO 0 SO THAT FIRST CONDITION IS MET
+     parent[0] = -1; //REPEATED AGAIN THE ROOT WILL NOT HAVE ANY PARENT
+
+     for (int count = 0; count < V-1; count++)
+     {
+        int u = Min(key, mark,V);
+        mark[u] = true;
+
+        for (int v = 0; v < V; v++)
+        {
+          if (graph[u][v] && mark[v] == false && graph[u][v] <  key[v])
+          {
+              parent[v]  = u;
+              key[v] = graph[u][v];
+          }
+        }
+     }
+     PrintPrim(parent, V, graph);   //CALL THE PRINTING PRESS
+}
+int main()                      //CHANGE INT TO VOID IF USING TURBOC++
+{   int V,i,j,g[100][100];     //NECESSARY VARIABLES
+    char ch;
+
+     cout<<"\nEnter number of vertex: ";
+     cin>>V;
+
+     cout<<"\nEnter the values of edges: ";
+     for(i=0;i<V;i++)
+     {
+       for(j=0;j<V;j++)
+       {
+        cout<<"\nEnter y if there is vertex between "<<i<<","<<j;
+        cin>>ch;
+        switch(ch)
+        {
+          case 'y':    cout<<"\nEnter cost ";
+                       cin>>g[i][j];
+                       break;
+          case 'Y':    cout<<"\nEnter cost ";
+                       cin>>g[i][j];
+                       break;
+          default:     g[i][j]=0;
+        }
+       }
+     }
+     cout<<"\n\nMST by PRIMS ALGORITHM is: \n";
+       PRIMS(g,V);
+    return 0;        //CHANGE TO GETCH(); IF YOU USE TURBO C++ 
+}
