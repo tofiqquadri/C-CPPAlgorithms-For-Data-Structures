@@ -1,0 +1,51 @@
+/*****************************************************************
+*             DYNAMIC PROGRAMMING PROBLEM SPOJ SOLUTION          *
+* IMPLIMENTATION BY TOFIQ QUADRI : CONTACT tofiqquadri@ymail.com *
+*****************************************************************/
+#include<iostream>   //CHANGE TO IOSTREAM.H IF USING TURBO C++
+#include<stdio.h>
+#include<string.h>   //FOR STRING FUNCTIONS
+
+using namespace std;
+
+int main()          //CHANGE TO VOID MAIN FOR TURBO C++
+{
+   int l;           //TO HOLD LENGTH OF STRING
+
+   char str[3000];  // TO TAKE STRING WITH NULL
+
+   int x=1;         //TO PRINT NUMBER OF INPUT IN SERIAL ORDER
+
+   while(1)         //FOREVER TRUE UNTIL BREAK IS USED
+   {
+
+    cin>>str;       //TAKE INPUT STRING OF { AND }
+
+    if(str[0]=='-') //IF INPUT == -- THEN BREAK
+       break;
+    else            //OTHERWISE CONTINUE TO CALCULATE THE RESULTS
+    {
+     l=strlen(str); //LENGTH OF STRING IS CALCULATED
+     int count=0;   //INITIAL COUNTER OF RIGHT BRACES
+     int bal=0;     //BALANCING FACTOR OF STRING STARTING WITH }
+
+     for(int i=0;i<l;i++) //RUNN TILL END OF STRING
+     {
+        if(str[i]=='}')
+           count--;
+        else
+           count++;
+
+        if(count<0)
+        {
+           count=1;
+           bal++;
+        }
+     }
+
+      cout<<x<<"."<<" "<<bal+count/2<<endl; //PRINT FINAL RESULT
+      x++;
+    }
+  }
+ return 0;         //REPLACE WITH GETCH(); IF USING TURBO C++
+}
