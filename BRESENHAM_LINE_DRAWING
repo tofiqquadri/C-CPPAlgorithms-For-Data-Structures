@@ -1,0 +1,76 @@
+/* BRESENHAM LINE DRAWING ALGOREITHM IMPLIMENTATION IN C * 
+*  BY TOFIQ QUADRI       CONTACT: TOFIQQUADRI@YMAIL.COM */
+#include <graphics.h>
+#include <iostream.h>
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>
+
+//ALGORITHM FOR BRESENHAM
+void breline(int x1,int y1,int x2,int y2)
+{
+   int x,y,dx,dy,dx2,dy2;
+   int p;
+   dx=abs(x1-x2);   //absolute function from math.h
+   dy=abs(y1-y2);
+
+   dx2=2*dx;
+   dy2=2*dy;
+
+   p=dy2-dx;
+   x=x1,y=y1;
+
+   putpixel(x,y,10);     //DRAW A SINGLE POINT ON THE SCREEN
+   for(int k=x;k<=x2;k++)
+   {
+      putpixel(x,y,10);
+      if(p<0)
+      {
+	x=x+1;
+	y=y;
+	p=p+dy2;
+      }
+      else
+      {
+	x=x+1;
+	y=y+1;
+	p=p+dy2-dx2;
+      }
+      putpixel(x,y,10);
+   }
+}
+
+void main(void)
+{
+   /* request auto detection */
+   int gdriver = DETECT, gmode, errorcode;
+   int x1,y1,x2,y2;
+
+   /* initialize graphics and local variables */
+   //CHANGE THE PATH C:\\TURBOC3\\BGI TO YOUR 
+   //TURBO C FOLDER LOCATION
+   initgraph(&gdriver, &gmode, "c:\\turboc3\\bgi");
+
+   /* read result of initialization */
+   errorcode = graphresult();
+   if (errorcode != grOk)  /* an error occurred */
+   {
+      printf("Graphics error: %s\n", grapherrormsg(errorcode));
+      printf("Press any key to halt:");
+      getch();
+   }
+    
+   //COORDINATES OF STARTING POINT OF LINE
+   cout<<"\n\nEnter x1:";cin>>x1;
+   cout<<"Enter y1:";cin>>y1;
+   //COORDINATES OF END POINTS OF LINE
+   cout<<"Enter x2:";cin>>x2;
+   cout<<"Enter y2:";cin>>y2;
+
+   //CALLING AND PASSING POINTS OF LINE IN BRESENHAM LINE 
+   //DRAWING ALGORITHM
+   breline(x1,y1,x2,y2);
+   /* clean up */
+   getch();
+   closegraph();
+}
