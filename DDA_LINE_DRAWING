@@ -1,0 +1,65 @@
+/*  DDA LINE DRAWING ALGORITHM IMPLIMENTATION IN C   *
+*   BY TOFIQ QUADRI  CONTACT: TOFIQQUADRI@YMAIL.COM  */
+#include <graphics.h>
+#include <iostream.h>
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>
+#define round(x) (int)(x+0.5) //MACRO FOR ROUND FUNCTION
+
+//DDA ALGORITHM FUNCTION DEFINATION
+void linee(int x1,int y1,int x2,int y2)
+{
+   int x,y,dx,dy;
+   int step;
+   float dxi,dyi;
+   dx=abs(x1-x2);
+   dy=abs(y1-y2);
+   x=x1;
+   y=y1;
+   step = dx>dy ? dx : dy ;  //CALCULATE THE VALUE OF STEP FUNCTION
+
+   dxi=dx/(float)step;
+   dyi=dy/(float)step;
+
+
+   putpixel(round(x),round(y),10);
+   for(int k=0;k<step;k++)
+   {
+      putpixel(round(x),round(y),10);
+      x=x+dxi;
+      y=y+dyi;
+   }
+}
+
+//MAIN
+void main(void)
+{
+   /* request auto detection */
+   int gdriver = DETECT, gmode, errorcode;
+   int x1,y1,x2,y2;
+
+   /* initialize graphics and local variables */
+   initgraph(&gdriver, &gmode, "c:\\turboc3\\bgi");
+
+   /* read result of initialization */
+   errorcode = graphresult();
+   if (errorcode != grOk)  /* an error occurred */
+   {
+      printf("Graphics error: %s\n", grapherrormsg(errorcode));
+      printf("Press any key to halt:");
+      getch();
+   }
+   //STARTING POINT OF THE LINE
+   cout<<"\n\nEnter x1:";cin>>x1;
+   cout<<"Enter y1:";cin>>y1;
+   //END POINTS OF THE LINE
+   cout<<"Enter x2:";cin>>x2;
+   cout<<"Enter y2:";cin>>y2;
+
+   //CALLING AND PASSING THE COORDINATES OF LINE TO DDA FUNCTION
+   linee(x1,y1,x2,y2);
+   /* clean up */
+   getch();
+   closegraph();
+}
